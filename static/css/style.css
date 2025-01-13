@@ -1,0 +1,248 @@
+/* General Styles */
+body {
+    font-family: "Georgia", serif;
+    background-color: #fefbf3;
+    color: #2c3e50;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 25px;
+    background: #faf3e0;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    font-size: 2.5em;
+    color: #8e7037;
+    margin-bottom: 20px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+h2 {
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    font-size: 1.5em;
+    color: #8e7037;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #d2b48c;
+    padding-bottom: 5px;
+}
+
+/* Two-Column Layout */
+.content {
+    display: flex;
+    justify-content: space-between;
+    gap: 25px;
+}
+
+.settings, .results {
+    flex: 1;
+    padding: 20px;
+    background: #fff9f2;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border: 1px solid #d2b48c;
+}
+
+/* Form Styles */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-size: 1.1em;
+    color: #5a4633;
+    margin: 15px 0 5px;
+    font-weight: bold;
+}
+
+input, select, button {
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #c4a484;
+    border-radius: 5px;
+    font-size: 1em;
+    background: #fefaf0;
+    color: #2c3e50;
+}
+
+input:focus, select:focus {
+    border-color: #8e7037;
+    outline: none;
+    box-shadow: 0 0 4px rgba(142, 112, 55, 0.5);
+}
+
+button {
+    background: #8e7037;
+    color: white;
+    font-weight: bold;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background: #6e552a;
+}
+
+/* Results Section */
+#results {
+    margin-top: 10px;
+    padding: 15px;
+    background: #faf3e0;
+    border: 1px solid #d2b48c;
+    border-radius: 8px;
+    color: #5a4633;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 1em;
+    line-height: 1.5;
+    white-space: pre-wrap;
+}
+
+#results p {
+    font-style: italic;
+    color: #7f8c8d;
+}
+
+/* Additional Styles for Aesthetic Enhancements */
+.settings {
+    border-left: 5px solid #8e7037;
+}
+
+.results {
+    border-right: 5px solid #8e7037;
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+.content {
+    align-items: flex-start;
+}
+
+footer {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 0.9em;
+    color: #7f8c8d;
+    font-style: italic;
+}
+
+/* Button Styles */
+.word-btn {
+    display: inline-block;
+    padding: 10px 15px;
+    margin: 5px;
+    font-size: 1em;
+    border: 2px solid #8e7037;
+    border-radius: 5px;
+    background: #faf3e0;
+    color: #8e7037;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.word-btn:hover {
+    background: #8e7037;
+    color: #ffffff;
+}
+
+.word-btn:active {
+    transform: scale(0.95);
+}
+
+.button-group {
+    margin: 10px 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+/* General Layout Adjustments */
+.columns {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.column {
+    flex: 1;
+    padding: 15px;
+    background: #fff9f2;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border: 1px solid #d2b48c;
+}
+
+/* Column Headings */
+.column h3 {
+    text-align: center;
+    font-size: 1.5em;
+    color: #8e7037;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #d2b48c;
+    padding-bottom: 5px;
+}
+
+/* Button Group Styling */
+.button-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+/* Button Styles */
+.word-btn {
+    display: inline-block;
+    padding: 10px 15px;
+    font-size: 1em;
+    border: 2px solid #8e7037;
+    border-radius: 5px;
+    background: #faf3e0;
+    color: #8e7037;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.word-btn:hover {
+    background: #8e7037;
+    color: #ffffff;
+}
+
+.word-btn:active {
+    transform: scale(0.95);
+}
+
+/* Active Word Highlight */
+.word-btn.active {
+    border-color: #3d9970;
+    background-color: #3d9970;
+    color: #ffffff;
+}
+
+/* Success and Error Messages */
+#status-message {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+/* Matched Buttons */
+.word-btn.matched {
+    background-color: #d3d3d3; /* Light gray */
+    color: #7f8c8d; /* Muted text */
+    border-color: #d3d3d3;
+    cursor: not-allowed;
+    pointer-events: none;
+}
