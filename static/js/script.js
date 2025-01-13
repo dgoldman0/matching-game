@@ -47,8 +47,6 @@ function initializeGame(pairs, L1_language, L2_language) {
     const shuffledL1 = shuffleArray([...L1_words]);
     const shuffledL2 = shuffleArray([...L2_words]);
 
-    let timerInterval = startTimer();
-
     const L1Buttons = createButtons(shuffledL1, "L1");
     const L2Buttons = createButtons(shuffledL2, "L2");
 
@@ -66,6 +64,9 @@ function initializeGame(pairs, L1_language, L2_language) {
         <p id="status-message"></p>
         <p id="timer">Time: 0:00</p>
     `;
+
+    let timerInterval = startTimer();
+
 
     attachButtonHandlers(pairs, () => {
         clearInterval(timerInterval); // Stop timer
@@ -194,12 +195,16 @@ function startTimer() {
     secondsElapsed = 0;
     const timerElement = document.getElementById("timer");
 
+    if (!timerElement) {
+        console.error("Timer element not found in the DOM.");
+        return null;
+    }
+
     return setInterval(() => {
         secondsElapsed++;
         timerElement.textContent = `Time: ${formatTime(secondsElapsed)}`;
     }, 1000);
 }
-
 /**
  * Format time as MM:SS.
  */
