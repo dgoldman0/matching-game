@@ -2,8 +2,56 @@ from flask import Flask, render_template, request, jsonify
 from pydantic import BaseModel
 from enum import Enum
 from openai import OpenAI
+import random
 
 app = Flask(__name__)
+
+# List of categories: 
+
+categories = [
+    'Animals',
+    'Fruits',
+    'Vegetables',
+    'Colors',
+    'Numbers',
+    'Body Parts',
+    'Dealing with Time, Dates, etc.',
+    'Common Phrases',
+    'Greetings',
+    'Weather',
+    'Directions',
+    'Shopping',
+    'Food',
+    'Travel',
+    'Health',
+    'Emergencies',
+    'Work',
+    'School',
+    'Family',
+    'Relationships',
+    'Sports',
+    'Entertainment',
+    'Technology',
+    'Nature',
+    'Hobbies',
+    'Music',
+    'Art',
+    'Literature',
+    'History',
+    'Geography',
+    'Politics',
+    'Religion',
+    'Science',
+    'Math',
+    'Language',
+    'Culture',
+    'Society',
+    'Business',
+    'Finance',
+    'Law',
+    'Government',
+    'Military']
+
 
 # Structured output models
 class Pair(BaseModel):
@@ -32,9 +80,12 @@ client = OpenAI()
 
 def generate_language_pairs(L1_language: str, L2_language: str, n: int, reading_level: ReadingLevel) -> dict:
     # Prepare OpenAI API call
+
+    selected_categories = random.sample(categories, 5)
+
     prompt = {
         "role": "system",
-        "content": "You are a helpful assistant generating language pairs. Generate n pairs of random words in two different languages. Adjust the complexity of the words based on the reading level provided."
+        "content": "You are a helpful assistant generating language pairs. Generate n pairs of random words in two different languages. Adjust the complexity of the words based on the reading level provided. You will be given a selection of categories to draw from. You may vary noun, adjective, verb (use infinitive), etc., but respect reading level."
     }
     user_message = {
         "role": "user",
@@ -42,7 +93,8 @@ def generate_language_pairs(L1_language: str, L2_language: str, n: int, reading_
             f"Generate {n} matching pairs of words in the following languages:\n"
             f"L1: {L1_language}\nL2: {L2_language}\n"
             f"Reading Level: {reading_level.value.capitalize()}\n"
-            f"Description: {reading_level.description()}"
+            f"Description: {reading_level.description()}\n"
+            f"Categories: {', '.join(selected_categories)}\n"
         )
     }
 
