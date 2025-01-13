@@ -39,14 +39,14 @@ function initializeGame(pairs, L1_language, L2_language) {
     const resultsDiv = document.getElementById("results");
     resultsDiv.innerHTML = ""; // Clear previous results
 
+    const autoRefresh = document.getElementById("auto-refresh").checked; // Get auto-refresh setting
+
     // Shuffle words independently for L1 and L2
     const L1_words = pairs.map(pair => pair.L1);
     const L2_words = pairs.map(pair => pair.L2);
     const shuffledL1 = shuffleArray([...L1_words]);
     const shuffledL2 = shuffleArray([...L2_words]);
 
-    let activeWord = null;
-    let correctMatches = 0;
     let timerInterval = startTimer();
 
     const L1Buttons = createButtons(shuffledL1, "L1");
@@ -68,8 +68,15 @@ function initializeGame(pairs, L1_language, L2_language) {
     `;
 
     attachButtonHandlers(pairs, () => {
-        clearInterval(timerInterval); // Stop timer when all pairs are matched
+        clearInterval(timerInterval); // Stop timer
         displaySuccess(`All pairs matched in ${formatTime(secondsElapsed)}.`);
+
+        // Auto-refresh logic
+        if (autoRefresh) {
+            setTimeout(() => {
+                document.getElementById("language-pair-form").dispatchEvent(new Event("submit"));
+            }, 1000); // Delay before fetching new words
+        }
     });
 }
 
