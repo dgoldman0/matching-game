@@ -203,6 +203,7 @@ class ReadingLevel(str, Enum):
     proficient = "proficient"
     advanced = "advanced"
 
+    # Adding in amount of difference at each difficulty level might work.
     def description(self):
         descriptions = {
             "beginner": "Focus on individual, simple, and common words like basic nouns, verbs, and adjectives. No phrases or sentences. Suitable for absolute beginners building a foundational vocabulary.",
@@ -220,7 +221,8 @@ def generate_language_pairs(L1_language: str, L2_language: str, n: int, reading_
     # Prepare OpenAI API call
 
     selected_categories = random.sample(categories, 8)
-
+    
+    # Making real progress. The problem is that especially past basic, the options are SO different that I can guess based off of a single word. That means that as the sentences become more complex, the differencs should be more subtle.
     prompt = {
         "role": "system",
         "content": """You are a helpful assistant specializing in generating pairs of words, phrases, and/or sentences in two different languages. You will be given the two languages to use, the skill level and the list of categories to draw from."""
