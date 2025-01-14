@@ -86,7 +86,7 @@ def generate_language_pairs(L1_language: str, L2_language: str, n: int, reading_
 
     prompt = {
         "role": "system",
-        "content": "You are a helpful assistant generating language pairs. Generate n pairs of random words in two different languages. Adjust the complexity of the words based on the reading level provided. You will be given a selection of categories to draw from. You may vary noun, adjective, verb (use infinitive), etc., OR a short phrase (which can use proper conjugations, etc. but always respect reading level. When selecting words, consider how the categories may relate. To help, start by writing a representative story based on the selected categories. You can choose English as your story language, regardless of language choices. Be creative with the story because it will be a source of inspiration for the words."
+        "content": "You are a helpful assistant generating language pairs. Generate n pairs of random words in two different languages. Adjust the complexity of the words based on the reading level provided. You will be given a selection of categories to draw from. You may vary noun, adjective, verb (use infinitive), etc., OR a short phrase (which can use proper conjugations, etc. but always respect reading level. When selecting words, consider how the categories may relate. To help, start by writing a representative story based on the selected categories. Write the story in language 2. Be creative with the story because it will be a source of inspiration for the words."
     }
     user_message = {
         "role": "user",
