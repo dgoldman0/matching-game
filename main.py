@@ -205,11 +205,11 @@ class ReadingLevel(str, Enum):
 
     def description(self):
         descriptions = {
-            "beginner": "For learners starting from scratch, focusing on basic greetings, essential vocabulary, and simple, structured phrases for everyday situations. Emphasis on listening and speaking.",
-            "basic": "Building on foundational skills with simple grammar structures, practical vocabulary, and short texts or dialogues. Ideal for those gaining confidence in basic communication.",
-            "intermediate": "Strengthening understanding of grammar with more complex verb conjugations and sentence structures. Expanding conversational skills and comprehension of intermediate-level texts.",
-            "proficient": "Focusing on advanced vocabulary, nuanced grammar, and specialized topics. Developing fluency in expressing ideas clearly and confidently in diverse scenarios.",
-            "advanced": "Challenging for near-native fluency, exploring idiomatic expressions, formal writing styles, and stylistic nuances. Designed for professionals, academics, or deep cultural immersion."
+            "beginner": "Focus on individual, simple, and common words like basic nouns, verbs, and adjectives. No phrases or sentences. Suitable for absolute beginners building a foundational vocabulary.",
+            "basic": "Simple grammar structures with short phrases and familiar vocabulary. Introduces common conjugations and inflections, ideal for learners gaining confidence in basic communication.",
+            "intermediate": "Moderately complex sentences and vocabulary, including more nuanced word choices and intermediate-level grammar. Encourages conversational fluency and comprehension of short texts.",
+            "proficient": "Advanced vocabulary, detailed grammar, and idiomatic expressions. Words and phrases are tailored for clear and confident communication in diverse, real-world situations.",
+            "advanced": "Challenging and uncommon vocabulary with complex sentence structures and stylistic nuances. Ideal for near-native fluency, professional communication, and deep cultural understanding."
         }
         return descriptions[self.value]
 
@@ -223,16 +223,16 @@ def generate_language_pairs(L1_language: str, L2_language: str, n: int, reading_
 
     prompt = {
         "role": "system",
-        "content": "You are a helpful assistant generating words, phrases, and/or sentence pairs. Generate n pairs of random words (or phrases) in two different languages. Adjust the complexity of the words based on the reading level provided. You will be given a selection of categories to draw from. You may vary noun, adjective, verb (use infinitive), etc., OR a short phrase (which can use proper conjugations, etc. but always respect reading level. When selecting words, consider how the categories may relate. To help, start by writing a representative story based on the selected categories. Write the story in language 2. Be creative with the story because it will be a source of inspiration for the words."
+        "content": """You are a helpful assistant specializing in generating pairs of words, phrases, and/or sentences in two different languages. You will be given the two languages to use, the skill level and the list of categories to draw from."""
+
     }
     user_message = {
         "role": "user",
         "content": (
             f"L1: {L1_language}\nL2: {L2_language}\n"
-            f"Reading Level: {reading_level.value.capitalize()}\n"
-            f"Description: {reading_level.description()}\n"
+            f"Skill Level: {reading_level.description()}\n"
             f"Categories: {', '.join(selected_categories)}\n"
-            f"Write a representative story and then generate {n} matching pairs, aligning with the requirements above:\n"
+            f"Write a representative story and then generate {n} matching pairs, aligning with the requirements above, respecting the skill level:\n"
         )
     }
 
