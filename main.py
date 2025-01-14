@@ -207,10 +207,10 @@ class ReadingLevel(str, Enum):
     def description(self):
         descriptions = {
             "beginner": "Focus on individual, simple, and common words like basic nouns, verbs, and adjectives. No phrases or sentences. Suitable for absolute beginners building a foundational vocabulary.",
-            "basic": "Simple grammar structures with short phrases and familiar vocabulary. Introduces common conjugations and inflections, ideal for learners gaining confidence in basic communication.",
-            "intermediate": "Moderately complex sentences and vocabulary, including more nuanced word choices and intermediate-level grammar. Encourages conversational fluency and comprehension of short texts.",
-            "proficient": "Advanced vocabulary, detailed grammar, and idiomatic expressions. Words and phrases are tailored for clear and confident communication in diverse, real-world situations.",
-            "advanced": "Challenging and uncommon vocabulary with complex sentence structures and stylistic nuances. Ideal for near-native fluency, professional communication, and deep cultural understanding."
+            "basic": "Simple grammar structures with short phrases and familiar vocabulary. Tests the ability of the learner to understand parts of speech, conjugation, word agreement, genders, cases, etc. depending on what the languages have. No complete sentences yet, but all should be at least partial phrases. There should start to be more options that are similar to make it difficult.",
+            "intermediate": "Full sentences including more nuanced word choices and intermediate-level grammar. Encourages conversational fluency and comprehension of short texts. Multiple options should be similar, but not identical.",
+            "proficient": "Advanced vocabulary, detailed grammar, and idiomatic expressions. Words and phrases are tailored for clear and confident communication in diverse, real-world situations. The differences between options should be subtle and require a deep understanding of the language.",
+            "advanced": "Challenging and uncommon vocabulary with complex sentence structures and stylistic nuances. Ideal for near-native fluency, professional communication, and deep cultural understanding. The differences between options should be very subtle and require a deep understanding of the language."
         }
         return descriptions[self.value]
 
@@ -222,11 +222,13 @@ def generate_language_pairs(L1_language: str, L2_language: str, n: int, reading_
 
     selected_categories = random.sample(categories, 8)
     
+    # Create an instruction informing the system on all reading levels, by joining the descriptions of each level (and their idnetifier)
+    levels = "\n".join([f"{level.value}: {level.description()}" for level in ReadingLevel])
+
     # Making real progress. The problem is that especially past basic, the options are SO different that I can guess based off of a single word. That means that as the sentences become more complex, the differencs should be more subtle.
     prompt = {
         "role": "system",
-        "content": """You are a helpful assistant specializing in generating pairs of words, phrases, and/or sentences in two different languages. You will be given the two languages to use, the skill level and the list of categories to draw from."""
-
+        "content": f"""You are a helpful assistant specializing in generating pairs of words, phrases, and/or sentences in two different languages. You will be given the two languages to use, the skill level and the list of categories to draw from.\n\nSkill level details:\n{levels}\n\nCategories:\n{', '.join(selected_categories)}\n\n"""
     }
     user_message = {
         "role": "user",
