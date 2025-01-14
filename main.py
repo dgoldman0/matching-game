@@ -198,14 +198,18 @@ class LanguagePairs(BaseModel):
 # Reading level Enum
 class ReadingLevel(str, Enum):
     beginner = "beginner"
+    basic = "basic"
     intermediate = "intermediate"
+    proficient = "proficient"
     advanced = "advanced"
 
     def description(self):
         descriptions = {
-            "beginner": "Simple, common words, basic greetings, and simple phrases, suitable for new learners.",
-            "intermediate": "Moderately complex words, more conjugations and inflections, more elaborate phrases, for learners nearing basic proficiency.",
-            "advanced": "Challenging and uncommon words and full sentences for fluent speakers."
+            "beginner": "For learners starting from scratch, focusing on basic greetings, essential vocabulary, and simple, structured phrases for everyday situations. Emphasis on listening and speaking.",
+            "basic": "Building on foundational skills with simple grammar structures, practical vocabulary, and short texts or dialogues. Ideal for those gaining confidence in basic communication.",
+            "intermediate": "Strengthening understanding of grammar with more complex verb conjugations and sentence structures. Expanding conversational skills and comprehension of intermediate-level texts.",
+            "proficient": "Focusing on advanced vocabulary, nuanced grammar, and specialized topics. Developing fluency in expressing ideas clearly and confidently in diverse scenarios.",
+            "advanced": "Challenging for near-native fluency, exploring idiomatic expressions, formal writing styles, and stylistic nuances. Designed for professionals, academics, or deep cultural immersion."
         }
         return descriptions[self.value]
 
@@ -219,7 +223,7 @@ def generate_language_pairs(L1_language: str, L2_language: str, n: int, reading_
 
     prompt = {
         "role": "system",
-        "content": "You are a helpful assistant generating language pairs. Generate n pairs of random words (or phrases) in two different languages. Adjust the complexity of the words based on the reading level provided. You will be given a selection of categories to draw from. You may vary noun, adjective, verb (use infinitive), etc., OR a short phrase (which can use proper conjugations, etc. but always respect reading level. When selecting words, consider how the categories may relate. To help, start by writing a representative story based on the selected categories. Write the story in language 2. Be creative with the story because it will be a source of inspiration for the words."
+        "content": "You are a helpful assistant generating words, phrases, and/or sentence pairs. Generate n pairs of random words (or phrases) in two different languages. Adjust the complexity of the words based on the reading level provided. You will be given a selection of categories to draw from. You may vary noun, adjective, verb (use infinitive), etc., OR a short phrase (which can use proper conjugations, etc. but always respect reading level. When selecting words, consider how the categories may relate. To help, start by writing a representative story based on the selected categories. Write the story in language 2. Be creative with the story because it will be a source of inspiration for the words."
     }
     user_message = {
         "role": "user",
@@ -228,7 +232,7 @@ def generate_language_pairs(L1_language: str, L2_language: str, n: int, reading_
             f"Reading Level: {reading_level.value.capitalize()}\n"
             f"Description: {reading_level.description()}\n"
             f"Categories: {', '.join(selected_categories)}\n"
-            f"Generate {n} matching pairs of words and/or phrases in the following languages:\n"
+            f"Write a representative story and then generate {n} matching pairs, aligning with the requirements above:\n"
         )
     }
 
