@@ -107,7 +107,7 @@ def generate_language_pairs(L1_language: str, L2_language: str, n: int, reading_
     )
 
     parsed = response.choices[0].message.parsed.model_dump()
-    return {'pairs': parsed["pairs"]}
+    return parsed
 
 @app.route("/")
 def index():
