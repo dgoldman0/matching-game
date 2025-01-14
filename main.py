@@ -9,48 +9,181 @@ app = Flask(__name__)
 # List of categories: 
 
 categories = [
-    'Animals',
-    'Fruits',
-    'Vegetables',
-    'Colors',
-    'Numbers',
-    'Body Parts',
-    'Dealing with Time, Dates, etc.',
-    'Common Phrases',
-    'Greetings',
-    'Weather',
-    'Directions',
-    'Shopping',
-    'Food',
-    'Travel',
-    'Health',
-    'Emergencies',
-    'Work',
-    'School',
-    'Family',
-    'Relationships',
-    'Sports',
-    'Entertainment',
-    'Technology',
-    'Nature',
-    'Hobbies',
-    'Music',
-    'Art',
-    'Literature',
-    'History',
-    'Geography',
-    'Politics',
-    'Religion',
-    'Science',
-    'Math',
-    'Language',
-    'Culture',
-    'Society',
-    'Business',
-    'Finance',
-    'Law',
-    'Government',
-    'Military']
+    # Animals
+    "Domesticated Pets",
+    "Farm Animals",
+    "Wild Mammals",
+    "Birds",
+    "Reptiles & Amphibians",
+    "Marine Life",
+    "Insects & Arachnids",
+    
+    # Plants (Fruits, Vegetables, and More)
+    "Citrus Fruits",
+    "Berries & Stone Fruits",
+    "Tropical Fruits",
+    "Melons & Gourds",
+    "Root Vegetables",
+    "Leafy Greens",
+    "Cruciferous Vegetables",
+    "Legumes & Pulses",
+    "Herbs & Spices",
+    
+    # Colors & Shapes
+    "Basic Colors",
+    "Extended Color Palette",
+    "2D Shapes",
+    "3D Shapes",
+    
+    # Numbers & Mathematics
+    "Cardinal Numbers",
+    "Ordinal Numbers",
+    "Fractions, Decimals & Percentages",
+    "Arithmetic",
+    "Algebraic Concepts",
+    "Geometry & Measurement",
+    "Advanced Math Topics",
+    
+    # Body Parts & Health
+    "External Body Parts",
+    "Internal Organs",
+    "Body Systems",
+    "Symptoms & Illnesses",
+    "Medical Treatments & Procedures",
+    "Nutrition & Wellness",
+    
+    # Time & Calendars
+    "Days of the Week & Months",
+    "Seasons & Weather Patterns",
+    "Clock Times",
+    "Dates & Holidays",
+    
+    # Common Phrases & Greetings
+    "Polite Expressions",
+    "Formal Greetings & Farewells",
+    "Informal Greetings",
+    "Introducing Yourself & Others",
+    "Idioms & Slang",
+    
+    # Weather & Nature
+    "Weather Conditions",
+    "Severe Weather & Disasters",
+    "Natural Landforms",
+    "Ecosystems",
+    
+    # Directions & Navigation
+    "Compass Directions",
+    "Giving Simple Directions",
+    "Location & Position",
+    "Using Maps & GPS",
+    
+    # Shopping & Money
+    "Grocery Shopping",
+    "Clothing & Accessories",
+    "Online Shopping",
+    "Payment & Currency",
+    "Personal Finance",
+    
+    # Food & Dining
+    "Ingredients & Cooking Methods",
+    "Cuisines",
+    "Dishes & Meals",
+    "Dietary Preferences",
+    "Restaurant Etiquette",
+    
+    # Travel & Transportation
+    "Travel Planning & Booking",
+    "Transportation Methods",
+    "Accommodation",
+    "Tourism & Sightseeing",
+    "Visas & Border Control",
+    
+    # Emergencies & Safety
+    "Medical Emergencies",
+    "Accidents & Injuries",
+    "Natural Disasters",
+    "Emergency Services",
+    "Disaster Preparedness",
+    
+    # Work & Career
+    "Office Environment & Roles",
+    "Professional Communication",
+    "Job Hunting & Recruitment",
+    "Career Paths & Development",
+    "Freelancing & Entrepreneurship",
+    
+    # School & Education
+    "School Levels",
+    "Academic Subjects",
+    "Exams & Homework",
+    "Classroom Routines",
+    "Higher Education",
+    
+    # Family & Relationships
+    "Immediate Family Members",
+    "Extended Family",
+    "Romantic Relationships",
+    "Friendship & Social Circles",
+    "Conflict Resolution",
+    
+    # Sports & Recreation
+    "Team Sports",
+    "Individual Sports",
+    "Outdoor Activities",
+    "Competitive vs. Recreational Sports",
+    "Sports Terminology & Equipment",
+    
+    # Entertainment & Leisure
+    "Movies & TV",
+    "Music",
+    "Video Games",
+    "Art & Design",
+    "Literature & Reading",
+    "Theater & Performance Arts",
+    
+    # Technology & Science
+    "Computers & Software",
+    "Internet & Digital Life",
+    "Electronics & Gadgets",
+    "Artificial Intelligence & Robotics",
+    "Basic Sciences",
+    "Advanced Sciences",
+    
+    # Culture, Society & Lifestyle
+    "Traditions & Customs",
+    "Religious Practices",
+    "Social Issues & Ethics",
+    "Fashion & Trends",
+    "Hobbies & Personal Interests",
+    
+    # Language & Communication
+    "Grammar & Syntax",
+    "Vocabulary Building",
+    "Pronunciation & Phonetics",
+    "Dialect & Regional Varieties",
+    "Writing & Composition",
+    
+    # History & Geography
+    "Historical Eras",
+    "Major Civilizations & Empires",
+    "Key Historical Events",
+    "Physical Geography",
+    "Political Geography",
+    
+    # Politics, Law & Government
+    "Political Systems & Ideologies",
+    "Government Structures",
+    "Voting & Elections",
+    "Law & Legal Systems",
+    "Military & Defense",
+    
+    # Business & Finance
+    "Business Management",
+    "Marketing & Advertising",
+    "Entrepreneurship & Startups",
+    "Personal Finance",
+    "Investments & Trading"
+]
 
 
 # Structured output models
@@ -70,9 +203,9 @@ class ReadingLevel(str, Enum):
 
     def description(self):
         descriptions = {
-            "beginner": "Simple, common words suitable for new learners.",
-            "intermediate": "Moderately complex words for learners with basic proficiency.",
-            "advanced": "Challenging and uncommon words for fluent speakers."
+            "beginner": "Simple, common words, basic greetings, and simple phrases, suitable for new learners.",
+            "intermediate": "Moderately complex words, more elaborate phrases, for learners with basic proficiency.",
+            "advanced": "Challenging and uncommon words and full sentences for fluent speakers."
         }
         return descriptions[self.value]
 
@@ -86,16 +219,17 @@ def generate_language_pairs(L1_language: str, L2_language: str, n: int, reading_
 
     prompt = {
         "role": "system",
-        "content": "You are a helpful assistant generating language pairs. Generate n pairs of random words in two different languages. Adjust the complexity of the words based on the reading level provided. You will be given a selection of categories to draw from. You may vary noun, adjective, verb (use infinitive), etc., OR a short phrase (which can use proper conjugations, etc. but always respect reading level. When selecting words, consider how the categories may relate. To help, start by writing a representative story based on the selected categories. Write the story in language 2. Be creative with the story because it will be a source of inspiration for the words."
+        "content": "You are a helpful assistant generating language pairs. Generate n pairs of random words (or phrases) in two different languages. Adjust the complexity of the words based on the reading level provided. You will be given a selection of categories to draw from. You may vary noun, adjective, verb (use infinitive), etc., OR a short phrase (which can use proper conjugations, etc. but always respect reading level. When selecting words, consider how the categories may relate. To help, start by writing a representative story based on the selected categories. Write the story in language 2. Be creative with the story because it will be a source of inspiration for the words."
     }
     user_message = {
         "role": "user",
         "content": (
-            f"Generate {n} matching pairs of words in the following languages:\n"
+            f"Generate {n} matching pairs of words and/or phrases in the following languages:\n"
             f"L1: {L1_language}\nL2: {L2_language}\n"
             f"Reading Level: {reading_level.value.capitalize()}\n"
             f"Description: {reading_level.description()}\n"
             f"Categories: {', '.join(selected_categories)}\n"
+            f"Make sure your pairs are proper matches!"
         )
     }
 
