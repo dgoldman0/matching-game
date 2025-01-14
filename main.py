@@ -204,7 +204,7 @@ class ReadingLevel(str, Enum):
     def description(self):
         descriptions = {
             "beginner": "Simple, common words, basic greetings, and simple phrases, suitable for new learners.",
-            "intermediate": "Moderately complex words, more elaborate phrases, for learners with basic proficiency.",
+            "intermediate": "Moderately complex words, more conjugations and inflections, more elaborate phrases, for learners nearing basic proficiency.",
             "advanced": "Challenging and uncommon words and full sentences for fluent speakers."
         }
         return descriptions[self.value]
@@ -224,18 +224,17 @@ def generate_language_pairs(L1_language: str, L2_language: str, n: int, reading_
     user_message = {
         "role": "user",
         "content": (
-            f"Generate {n} matching pairs of words and/or phrases in the following languages:\n"
             f"L1: {L1_language}\nL2: {L2_language}\n"
             f"Reading Level: {reading_level.value.capitalize()}\n"
             f"Description: {reading_level.description()}\n"
             f"Categories: {', '.join(selected_categories)}\n"
-            f"Make sure your pairs are proper matches!"
+            f"Generate {n} matching pairs of words and/or phrases in the following languages:\n"
         )
     }
 
     # Call OpenAI API
     response = client.beta.chat.completions.parse(
-        model="gpt-4o-2024-08-06",
+        model="gpt-4o-2024-11-20",
         messages=[prompt, user_message],
         response_format=LanguagePairs
     )
