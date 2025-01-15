@@ -82,6 +82,21 @@ function initializeGame(pairs, L1_language, L2_language) {
 }
 
 /**
+ * Initilize local storage if not already initialized as mathing-game, and add new game to it
+ */
+function addGame(L1, L2, n, reading_level) {
+    if (!localStorage.getItem("matching-game")) {
+        localStorage.setItem("matching-game", JSON.stringify([]));
+    }
+
+    const games = JSON.parse(localStorage.getItem("matching-game"));
+    games.push({ L1, L2, n, reading_level });
+    localStorage.setItem("matching-game", JSON.stringify(games));
+
+    return games;
+}
+
+/**
  * Create buttons for a shuffled array of words.
  */
 function createButtons(words, side) {
