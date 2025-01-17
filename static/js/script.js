@@ -205,9 +205,9 @@ function displayMessage(message, color) {
 /**
  * Start a timer and return the interval reference.
  */
-let secondsElapsed = 0;
+// Same as above, but instead use timestamp and subtraction to avoid drift
 function startTimer() {
-    secondsElapsed = 0;
+    const startTime = Date.now();
     const timerElement = document.getElementById("timer");
 
     if (!timerElement) {
@@ -216,10 +216,11 @@ function startTimer() {
     }
 
     return setInterval(() => {
-        secondsElapsed++;
-        timerElement.textContent = `Time: ${formatTime(secondsElapsed)}`;
+        const elapsed = Date.now() - startTime;
+        timerElement.textContent = `Time: ${formatTime(Math.floor(elapsed / 1000))}`;
     }, 1000);
 }
+
 /**
  * Format time as MM:SS.
  */
