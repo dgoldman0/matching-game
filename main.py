@@ -236,7 +236,7 @@ def generate_language_pairs(L1_language: str, L2_language: str, n: int, reading_
             f"L1: {L1_language}\nL2: {L2_language}\n"
             f"Skill Level: {reading_level.description()}\n"
             f"Categories: {', '.join(selected_categories)}\n"
-            f"Write a representative story and then generate {n} matching pairs, aligning with the requirements above, respecting the skill level:\n"
+            f"Write a representative story and then generate {n} matching pairs, aligning with the requirements above, respecting the skill level and make sure that each pair translates properly between L1 and L2:\n"
         )
     }
 
