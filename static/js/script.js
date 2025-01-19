@@ -65,11 +65,11 @@ function initializeGame(pairs, L1_language, L2_language) {
         <p id="timer">Time: 0:00</p>
     `;
 
-    let timerInterval = startTimer();
-
+    let timerInterval, startTime = startTimer();
 
     attachButtonHandlers(pairs, () => {
         clearInterval(timerInterval); // Stop timer
+        const secondsElapsed = Math.floor((Date.now() - startTime) / 1000);
         displaySuccess(`All pairs matched in ${formatTime(secondsElapsed)}.`);
 
         // Auto-refresh logic
@@ -218,7 +218,7 @@ function startTimer() {
     return setInterval(() => {
         const elapsed = Date.now() - startTime;
         timerElement.textContent = `Time: ${formatTime(Math.floor(elapsed / 1000))}`;
-    }, 1000);
+    }, 1000), startTime;
 }
 
 /**
